@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 01:45:52 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/13 23:28:53 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/21 07:03:13 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,12 @@ int				r_fo(t_form *f, char *fo)
 	while ((fo[i] >= '0' && fo[i] <= '9') || fo[i] == '.')
 		i++;
 	j = 0;
-	if (fo[i] == '%')
-		f->lent[j] = fo[i++];
-	while ((fo[i] == 's' || fo[i] == 'd' || fo[i] == 'D' || fo[i] == 'p' ||
-	fo[i] == 'S' || fo[i] == 'i' || fo[i] == 'o' || fo[i] == 'O' ||
-	fo[i] == 'u' || fo[i] == 'U' || fo[i] == 'x' || fo[i] == 'X' ||
-	fo[i] == 'c' || fo[i] == 'C' || fo[i] == 'h' || fo[i] == 'l' ||
-	fo[i] == 'j' || fo[i] == 'z') && fo[i] != '%')
+	while (fo[i] == 'h' || fo[i] == 'l' || fo[i] == 'j' || fo[i] == 'z')
 		f->lent[j++] = fo[i++];
+	if (is_ec(fo[i]))
+		f->lent[j] = fo[i++];
+	else
+		return (0);
 	return (i);
 }
 
@@ -91,15 +89,13 @@ static int		inner(va_list *av, char *form)
 	return (j);
 }
 
-int				ft_printf(char *form, ...)
+int				ft_printf(const char *str, ...)
 {
 	va_list	av;
 	int		i;
 
-	va_start(av, form);
-	if (validate(form) == 1)
-		i = inner(&av, form);
+	va_start(av, (char *)str);
+	i = inner(&av, (char *)str);
 	va_end(av);
-	i = 0;
 	return (i);
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sfs1.c                                             :+:      :+:    :+:   */
+/*   sfs2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 06:14:15 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/19 06:21:40 by aherrera         ###   ########.fr       */
+/*   Created: 2018/03/18 11:31:26 by aherrera          #+#    #+#             */
+/*   Updated: 2018/03/19 02:50:09 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libpf.h"
 
-static char	*aux2(long long n)
+static char	*aux(char n)
 {
 	char	*r;
 	int		i;
@@ -39,15 +39,17 @@ static char	*aux2(long long n)
 	return (r);
 }
 
-char		*ft_lltoa(long long n)
+char		*ft_ctoa(int c)
 {
 	int		i;
 	char	*r;
+	char	n;
 
+	n = (char)c;
 	i = 0;
-	if ((unsigned long long)n == -LL_MIN)
-		return (ft_strdup(LL_MINS));
-	r = aux2(n);
+	if (n == -128)
+		return (ft_strdup("-128"));
+	r = aux(n);
 	if (r != NULL)
 	{
 		if (n == 0)
@@ -64,54 +66,56 @@ char		*ft_lltoa(long long n)
 	return (r);
 }
 
-static char	*aux(t_ull n, t_ull b)
+static char	*aux2(short n)
 {
 	char	*r;
 	int		i;
+	int		neg;
 
 	i = 0;
+	neg = 0;
+	if (n < 0)
+		neg = 1;
 	if (n == 0)
 		i = 1;
 	while (n != 0)
 	{
-		n = n / b;
+		n = n / 10;
 		i++;
 	}
-	r = (char *)malloc((i + 1) * sizeof(char));
+	r = (char *)malloc((i + 1 + neg) * sizeof(char));
+	if (r != NULL)
+	{
+		if (neg == 1)
+			r[i] = '-';
+		r[i + neg] = '\0';
+	}
 	return (r);
 }
 
-char		*ft_utoa(t_ull n, t_ull b, char x, int l)
+char		*ft_stoa(int c)
 {
 	int		i;
 	char	*r;
+	short	n;
 
-	n = change(n, l);
-	r = aux(n, b);
+	n = (short)c;
 	i = 0;
+	if (n == -32768)
+		return (ft_strdup("-32768"));
+	r = aux2(n);
 	if (r != NULL)
 	{
 		if (n == 0)
 			r[0] = '0';
+		if (n < 0)
+			n = n * -1;
 		while (n != 0)
 		{
-			r[i++] = n % b + '0';
-			if (r[i - 1] > '9')
-				r[i - 1] = r[i - 1] - '0' + x - 10;
-			n = n / b;
+			r[i++] = n % 10 + '0';
+			n = n / 10;
 		}
 		ft_strrev(r);
 	}
-	cleanse_str(&r);
 	return (r);
-}
-
-char		*ctos(char c)
-{
-	char *st;
-
-	st = (char *)malloc(2 * sizeof(char));
-	st[0] = c;
-	st[1] = '\0';
-	return (st);
 }

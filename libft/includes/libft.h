@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 15:14:24 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/14 02:25:15 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/21 03:05:20 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char				*ft_strtrim(char const *s);
 void				ft_putchar(char c);
 void				ft_putwchar(wint_t c);
 void				ft_putstr(char const *s);
+void				ft_putwstr(wchar_t *s, int i);
 void				ft_putendl(char const *s);
 void				ft_putnbr(int n);
 void				ft_putchar_fd(char c, int fd);
