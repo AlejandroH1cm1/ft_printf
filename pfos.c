@@ -6,12 +6,11 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 02:24:49 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/24 22:04:33 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/25 01:06:46 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libpf.h"
-#define COMP (!ft_strncmp(*st, "0x", 2) || !ft_strncmp(*st, "0X", 2))
 
 static char	*apply_0(char **st, t_form *f)
 {
@@ -23,14 +22,14 @@ static char	*apply_0(char **st, t_form *f)
 		i = f->widt;
 	if (st[0][0] == '-' || st[0][0] == '+' || st[0][0] == ' ')
 		tmp = ft_strdup(&(st[0][1]));
-	else if (COMP)
+	else if (is_hex(*st) || is_oct(*st))
 		tmp = ft_strdup(&(st[0][2]));
 	else
 		tmp = ft_strdup(*st);
 	if ((st[0][0] == '-' || st[0][0] == '+' || st[0][0] == ' ')
 			&& fl_exists(f->flag, '0') && f->prec < 0)
 		i--;
-	if (COMP && f->lent[ft_strlen(f->lent) - 1] != 'p')
+	if ((is_hex(*st) || is_oct(*st)) && f->lent[ft_strlen(f->lent) - 1] != 'p')
 		i -= 2;
 	while ((int)ft_strlen(tmp) < i)
 		strcomb(&tmp, "0", 1, 1);
