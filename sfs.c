@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 06:14:15 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/25 00:12:35 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/25 00:13:46 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char		*ft_utoa(t_ull n, t_ull b, char x, int l)
 		}
 		ft_strrev(r);
 	}
-	cleanse_str(r);
+	cleanse_str(&r);
 	return (r);
 }
 
