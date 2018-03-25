@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:34:30 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/23 15:13:13 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/25 00:52:21 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	pf_foa1(t_form *f, wint_t c)
 	int i;
 
 	i = 1;
-	ft_putwchar(c);
+	ft_putchar(c);
 	while (i < f->widt)
 	{
 		ft_putchar(' ');
@@ -38,7 +38,7 @@ int	pf_foa2(t_form *f, wint_t c)
 		ft_putchar(c2);
 		i++;
 	}
-	ft_putwchar(c);
+	ft_putchar(c);
 	return (i);
 }
 
