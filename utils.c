@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 05:37:34 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/25 00:06:04 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/25 00:50:42 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	strcomb(char **st, char *s, int order, int n)
 
 	tmp2 = (char *)malloc((n + 1) * sizeof(char));
 	ft_strncpy(tmp2, s, n);
+	tmp2[n] = '\0';
 	if (order == 0)
 		tmp = ft_strjoin(*st, tmp2);
 	else
