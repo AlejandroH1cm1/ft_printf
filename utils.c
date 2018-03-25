@@ -6,22 +6,26 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 05:37:34 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/21 06:52:27 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/24 23:44:01 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libpf.h"
 #include "libft.h"
 
-void	strcomb(char **st, char *s, int order)
+void	strcomb(char **st, char *s, int order, int n)
 {
 	char *tmp;
+	char *tmp2;
 
+	tmp2 = (char *)malloc((n + 1) * sizeof(char));
+	ft_strncpy(tmp2, s, n);
 	if (order == 0)
-		tmp = ft_strjoin(*st, s);
+		tmp = ft_strjoin(*st, tmp2);
 	else
-		tmp = ft_strjoin(s, *st);
+		tmp = ft_strjoin(tmp2, *st);
 	free(*st);
+	free(tmp2);
 	*st = tmp;
 }
 
@@ -44,16 +48,24 @@ int		gn_fo(t_form *f, t_fo *tab)
 	int i;
 
 	i = 0;
-	while (i < 54 && ft_strcmp(tab[i].fmt, f->lent) != 0)
-		i++;
+	if (f->lent[0] == '\0')
+		return (53);
+	if (!is_ec(f->lent[ft_strlen(f->lent) - 1]))
+		return (54);
 	if (f->lent[ft_strlen(f->lent) - 1] == 'p')
-		i = 45;
+		return (45);
 	if (f->lent[ft_strlen(f->lent) - 1] == 'O')
-		i = 16;
+		return (16);
 	if (f->lent[ft_strlen(f->lent) - 1] == 'D')
-		i = 2;
+		return (2);
 	if (f->lent[ft_strlen(f->lent) - 1] == 'U')
-		i = 23;
+		return (23);
+	if (f->lent[ft_strlen(f->lent) - 1] == 'C')
+		return (47);
+	if (f->lent[ft_strlen(f->lent) - 1] == 'S')
+		return (50);
+	while (i < 54 && ft_strcmp(tab[i].fmt, f->lent))
+		i++;
 	return (i);
 }
 

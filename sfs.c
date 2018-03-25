@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 06:14:15 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/19 06:21:40 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/24 23:56:48 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,15 @@ static char	*aux(t_ull n, t_ull b)
 	int		i;
 
 	i = 0;
-	if (n == 0)
-		i = 1;
-	while (n != 0)
+	while (n >= b)
 	{
 		n = n / b;
 		i++;
 	}
+	i++;
 	r = (char *)malloc((i + 1) * sizeof(char));
+	if (r != NULL)
+		r[i] = '\0';
 	return (r);
 }
 
@@ -102,7 +103,6 @@ char		*ft_utoa(t_ull n, t_ull b, char x, int l)
 		}
 		ft_strrev(r);
 	}
-	cleanse_str(&r);
 	return (r);
 }
 

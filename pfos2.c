@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:34:30 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/21 07:03:59 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/23 15:13:13 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ int	pf_foa2(t_form *f, wint_t c)
 	char	c2;
 
 	i = 1;
-	c2 = ' ';
-	if (fl_exists(f->flag, '0'))
-		c2 = '0';
+	c2 = ' ' + fl_exists(f->flag, '0') * 16;
 	while (i < f->widt)
 	{
 		ft_putchar(c2);
@@ -47,17 +45,19 @@ int	pf_foa2(t_form *f, wint_t c)
 int	pf_fob1(t_form *f, wchar_t *s)
 {
 	int i;
-	int j;
 
 	i = 0;
-	j = 0;
-	while (s[j] != '\0')
-		j++;
-	if (f->prec < j && f->prec >= 0)
-		j = f->prec;
-	while (i < j && s[i])
-		i++;
-	ft_putwstr(s, i);
+	if (s != NULL)
+		while (s[i] != '\0')
+			i++;
+	else
+		i = 6;
+	if (f->prec < i && f->prec >= 0)
+		i = f->prec;
+	if (s != NULL)
+		ft_putwstr(s, i);
+	else
+		ft_putwstr(L"(null)", i);
 	while (i < f->widt)
 	{
 		ft_putchar(' ');
@@ -75,8 +75,11 @@ int	pf_fob2(t_form *f, wchar_t *s)
 	i = 0;
 	j = 0;
 	c = 32 + fl_exists(f->flag, '0') * 16;
-	while (s[j] != '\0')
-		j++;
+	if (s != NULL)
+		while (s[j] != '\0')
+			j++;
+	else
+		j = 6;
 	if (f->prec < j && f->prec >= 0)
 		j = f->prec;
 	while (i < f->widt - j)
@@ -84,9 +87,10 @@ int	pf_fob2(t_form *f, wchar_t *s)
 		ft_putchar(c);
 		i++;
 	}
-	c = i + j;
-	while (i < c && s[i - (c - j)])
-		i++;
-	ft_putwstr(s, j);
+	i = i + j;
+	if (s != NULL)
+		ft_putwstr(s, j);
+	else
+		ft_putwstr(L"(null)", j);
 	return (i);
 }

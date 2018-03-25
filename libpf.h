@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 05:36:41 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/20 15:59:34 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/24 23:56:46 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,14 @@ int				validate(char *form);
 int				p_fo(va_list *av, t_form *f);
 int				gn_fo(t_form *f, t_fo *tab);
 int				fl_exists(char *fl, char f);
-void			strcomb(char **st, char *s, int order);
+void			strcomb(char **st, char *s, int order, int n);
 int				is_ec(char c);
 t_ull			change(t_ull n, int len);
 char			*ft_utoa(t_ull n, t_ull b, char x, int l);
 char			*ft_lltoa(long long n);
 void			cleanse_str(char **s);
+int				is_hex(char *s);
+int				is_oct(char *s);
 char			*ft_ctoa(int c);
 char			*ft_stoa(int c);
 char			*ctos(char c);
@@ -57,10 +59,10 @@ char			*s_fo1(va_list *av, int i);
 char			*s_fo2(va_list *av, int i);
 char			*s_fo3(va_list *av, int i);
 char			*s_fo4(va_list *av, int i);
-int				pf_fo1(char *st, t_form *f);
-int				pf_fo2(char *st, t_form *f);
-int				pf_fo3(char *st, t_form *f);
-int				pf_fo4(char *st, t_form *f);
+int				pf_fo1(char **st, t_form *f);
+int				pf_fo2(char **st, t_form *f);
+int				pf_fo3(char **st, t_form *f);
+int				pf_fo4(char **st, t_form *f);
 int				pf_foa1(t_form *f, wint_t c);
 int				pf_foa2(t_form *f, wint_t c);
 int				pf_fob1(t_form *f, wchar_t *s);

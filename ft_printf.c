@@ -6,7 +6,7 @@
 /*   By: aherrera <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 01:45:52 by aherrera          #+#    #+#             */
-/*   Updated: 2018/03/21 07:03:13 by aherrera         ###   ########.fr       */
+/*   Updated: 2018/03/23 15:42:28 by aherrera         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,17 @@ int				r_fo(t_form *f, char *fo)
 	j = 0;
 	while (fo[i] == 'h' || fo[i] == 'l' || fo[i] == 'j' || fo[i] == 'z')
 		f->lent[j++] = fo[i++];
-	if (is_ec(fo[i]))
-		f->lent[j] = fo[i++];
-	else
+	f->lent[j] = fo[i++];
+	if (f->lent[0] == 0)
 		return (0);
 	return (i);
 }
 
-static int		inner(va_list *av, char *form)
+static int		inner(va_list *av, char *form, int i, int j)
 {
-	int		i;
-	int		j;
 	int		k;
 	t_form	*f;
 
-	i = -1;
-	j = 0;
 	f = m_fo();
 	while (form[++i] != '\0')
 		if (form[i] == '%')
@@ -95,7 +90,7 @@ int				ft_printf(const char *str, ...)
 	int		i;
 
 	va_start(av, (char *)str);
-	i = inner(&av, (char *)str);
+	i = inner(&av, (char *)str, -1, 0);
 	va_end(av);
 	return (i);
 }

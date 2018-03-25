@@ -6,7 +6,7 @@
 #    By: aherrera <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/11 03:11:46 by aherrera          #+#    #+#              #
-#    Updated: 2018/03/21 07:04:54 by aherrera         ###   ########.fr        #
+#    Updated: 2018/03/23 11:32:40 by aherrera         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,4 +39,5 @@ test:
 
 retest: 
 	/bin/rm -f ./a.out
-	gcc main.c $(NAME) -I libft/includes -L libft -lft
+	gcc -o test main.c $(NAME) -I libft/includes -L libft -lft
+	gcc -o leak main.c kane_alloc_wrap.c $(NAME) -I libft/includes -L libft -lft
